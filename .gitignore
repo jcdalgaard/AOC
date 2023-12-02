@@ -1,1 +1,4 @@
 2023/day 1/example.txt
+node_modules/*
+node_modules/
+Githubpages/jcd-advent-of-code/package-lock.json
