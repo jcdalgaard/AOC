@@ -1,6 +1,9 @@
 <script>
-	import Snowflake from './Snowflake.svelte';
-  
+import Home from './Home.svelte';
+import Snowflake from './Snowflake.svelte';
+import Navigation from './Navigation.svelte';
+import { Router, Route } from "svelte-routing";
+import SolutionsShower from './SolutionsShower.svelte';	
 	 let snowflakes = [];
  
 	function addSnowflake() {
@@ -18,43 +21,32 @@
     }
   }
   
-	setInterval(addSnowflake, 300); // Add a snowflake every 100ms
+	setInterval(addSnowflake, 300);
 	
 	</script>
   
   <style>
-
-  
 	main {
-	  text-align: center; /* Center text in the main tag */
+	  text-align: center; 
 	  height: 120vh;
     margin: 0;
     padding: 0;
-    background-color: #333333; /* Dark grey background */
-    color: #FFD700; /* Yellow text */
+    background-color: #333333; 
+    color: #FFD700; 
     font-family: Arial, sans-serif;
 	}
+
   
-	.content {
-	  background-color: #4d4d4d; /* Lighter dark grey background for the content */
-	  padding: 20px;
-	  margin: 20px auto;
-	  max-width: 600px; /* Adjust width as needed */
-	}
-  
-	h1 {
-	}
-  
-	/* Additional styling as needed */
   </style>
-  
-  <main>
-	<h1>Advent of Code Solutions</h1>
-	<div class="content">
-	  <p>This repo contains the different solutions to the Advent of Code.</p>
-	  <!-- More content can be added here -->
-	</div>
-  
+	  <main>
+  <Router>
+
+	  <Navigation />
+	  <Route path="/" component={Home} />
+	  <!-- <Route path="/sabout" component={SolutionsShower} /> -->
+
+
+  </Router>
   {#each snowflakes as snowflake}
 	  <Snowflake size={snowflake.size} left={snowflake.left} duration={snowflake.duration} />
   {/each}
