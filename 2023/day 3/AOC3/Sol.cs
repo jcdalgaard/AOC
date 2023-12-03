@@ -11,24 +11,24 @@ namespace AOC3
     public class Sol
     {
         private List<List<char>> chars;
-        List<string> list;
         public List<Tuple<int, int>> tuples;
-        private List<int> numberToSum;
         public List<Tuple<int, List<Tuple<int, int>>>> tuplesToSum;
+        public List<List<Tuple<int, int>>> tuplesGears;
 
         public Sol(List<string> list)
         {
-            this.list = list;
+            
             this.chars = new List<List<char>>();
             this.tuples = new List<Tuple<int, int>>();
-            this.numberToSum = new List<int>();
             this.tuplesToSum = new List<Tuple<int, List<Tuple<int, int>>>>();
-            SetUpChars();
-            Console.WriteLine(chars.ToString());
+            this.tuplesGears = new List<List<Tuple<int, int>>>();
+
+            SetUpChars(list);
             CheckNumberLocations();
+            FindAllNumberPositions();
             Console.WriteLine("DONE...");
         }
-        private void SetUpChars()
+        private void SetUpChars(List<string> list)
         {
             foreach (var item in list)
             {
@@ -54,6 +54,7 @@ namespace AOC3
 
         }
 
+
         public void CheckNumberLocations()
         {
             for (int i = 0; i < chars.Count; i++)
@@ -66,50 +67,102 @@ namespace AOC3
                         if (i > 0)
                         {
                             CheckTrio(i - 1, j);
-
                         }
                         CheckTrio(i, j);
                         if (i < chars.Count - 1)
                         {
                             CheckTrio(i + 1, j);
                         }
-
-
                     }
 
                 }
             }
-
         }
-        public void FindNumbers()
+
+
+            private List<Tuple<int, int>> CheckTrioGears(int i, int j, List<Tuple<int, int>> tupless)
         {
-            if (tuples.Count == 0)
-            {
-                return;
+                if (char.IsDigit(chars[i][j - 1]))
+                {
+                    tupless.Add(new Tuple<int, int>(i, j - 1));
+                }
+                if (char.IsDigit(chars[i][j]))
+                {
+                    tupless.Add(new Tuple<int, int>(i, j));
+                }
+                if (char.IsDigit(chars[i][j + 1]))
+                {
+                    tupless.Add(new Tuple<int, int>(i, j + 1));
+                }
+            return tupless;
+
+                
+
             }
 
+            public void FindGears()
+        {
             for (int i = 0; i < chars.Count; i++)
-
             {
-                bool addItem = false;
-                string numberBuilder = "";
                 for (int j = 0; j < chars[i].Count; j++)
                 {
                     char c = chars[i][j];
-                    if (char.IsDigit(c))
+                    if (c == '*')
                     {
-                        numberBuilder += c;
 
-                    }
-                    if (tuples.Contains(new Tuple<int, int>(i, j)))
-                    {
-                        addItem = true;
+                        List<Tuple<int, int>> tupless =  new List<Tuple<int, int>>();
+                        if (i > 0)
+                        {
+                           tupless = CheckTrioGears(i - 1, j,tupless);
+
+                            }
+                           tupless = CheckTrioGears(i, j, tupless);
+                        if (i < chars.Count - 1)
+                        {
+                           tupless = CheckTrioGears(i + 1, j, tupless);
+                        }
+
+                        tuplesGears.Add(tupless);
                     }
 
                 }
-
-
             }
+        }
+
+        public void CalcGearRatio()
+        {
+            var sum = 0;
+            foreach (var item in tuplesGears)
+            {
+                int number1 = 0;
+                int number2 = 0;
+                foreach (var item1 in item)
+                {
+                    
+                foreach (var numbers in tuplesToSum)
+                {
+                    if (numbers.Item2.Contains(item1)){
+
+                            int tupleValue = numbers.Item1;
+                    
+
+                            if( number1 != tupleValue && number1 != 0)
+                            {
+                                number2 = numbers.Item1;
+                            }
+                            else
+                            {
+                                number1 = numbers.Item1;
+                            }
+
+                            
+                        }
+                }
+                }
+                sum += number1 * number2;
+                
+            }
+            Console.WriteLine(sum);
 
         }
 
