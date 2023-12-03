@@ -5,8 +5,11 @@
         static void Main(string[] args)
         {
             Sol s = new Sol(Filereader.ReadTextFile());
-            s.FindAllNumberPositions();
             s.GetSum();
+
+            s.FindGears();
+            s.CalcGearRatio();
+
         }
 
     }
