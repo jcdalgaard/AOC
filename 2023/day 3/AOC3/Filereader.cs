@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AOC3
+﻿namespace AOC3
 {
     internal class Filereader
     {
@@ -17,7 +11,7 @@ namespace AOC3
                 string s = "";
                 while ((s = sr.ReadLine()) != null)
                 {
-                    lines.Add(s);   
+                    lines.Add(s);
                 }
                 return lines;
             }
