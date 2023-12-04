@@ -57,7 +57,7 @@
                         {
                             CheckTrio(i - 1, j);
                         }
-                            CheckTrio(i, j);
+                        CheckTrio(i, j);
                         if (i < chars.Count - 1)
                         {
                             CheckTrio(i + 1, j);
@@ -121,15 +121,17 @@
         public void CalcGearRatio()
         {
             var sum = 0;
-            foreach (var item in tuplesGears)
+            for (int i = 0; i < tuplesGears.Count; i++)
             {
+                List<Tuple<int, int>>? item = tuplesGears[i];
                 int number1 = 0;
                 int number2 = 0;
-                foreach (var item1 in item)
+                for (int j = 0; j < item.Count; j++)
                 {
-
-                    foreach (var numbers in numberLocations)
+                    Tuple<int, int>? item1 = item[j];
+                    for (int k = 0; k < numberLocations.Count; k++)
                     {
+                        Tuple<int, List<Tuple<int, int>>>? numbers = numberLocations[k];
                         if (numbers.Item2.Contains(item1))
                         {
 
@@ -200,10 +202,12 @@
         public void GetSum()
         {
             var sum = 0;
-            foreach (var item in numberLocations)
+            for (int i = 0; i < numberLocations.Count; i++)
             {
-                foreach (var item1 in item.Item2)
+                Tuple<int, List<Tuple<int, int>>>? item = numberLocations[i];
+                for (int j = 0; j < item.Item2.Count; j++)
                 {
+                    Tuple<int, int>? item1 = item.Item2[j];
                     if (nearNodes.Contains(item1))
                     {
                         sum += item.Item1;
