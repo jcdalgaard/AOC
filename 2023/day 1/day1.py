@@ -12,8 +12,8 @@ def firstLetternumber(text):
       num = text.find(z)
       if num != -1:
             if Minn == None:
-              Minn = num, minNumbertext = textNumbers.index(z) +1 
-     
+              Minn = num 
+              minNumbertext = textNumbers.index(z) +1      
             if Minn != min(Minn,num):   
                 Minn = min(Minn,num)
                 minNumbertext = textNumbers.index(z) +1 
@@ -25,12 +25,13 @@ def firstLetternumber(text):
 
           if Maxx != max(Maxx,num):   
              Maxx = max(Maxx,num)  
-             maxNumbertext = textNumbers.index(z) +1
+             maxNumbertext = textNumbers.index(z)+1
     if Minn == None or Maxx == None:
         return text
     s = text[:Minn] + str(minNumbertext) + text[Minn + 1:]
     l = s[:Maxx] + str(maxNumbertext) + s[Maxx + 1:]   
     return l
+
 for z in range(len(lines)):
     lines[z] = firstLetternumber(lines[z])
 for x in lines: 
