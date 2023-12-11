@@ -61,11 +61,11 @@ function lcm(a, b) {
   return Math.abs(a * b) / gcd(a, b);
 }
 function lcmarr(arr) {
-  let lcmm = arr[0];
+  let currentLcmm = arr[0];
   for (let i = 1; i < arr.length; i++) {
-    lcmm = lcm(currentLcm, arr[i]);
+    currentLcmm = lcm(currentLcmm, arr[i]);
   }
-  return currentLcm;
+  return currentLcmm;
 }
 
 function calculateroute2() {
