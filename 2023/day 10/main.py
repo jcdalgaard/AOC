@@ -59,7 +59,7 @@ def readInGraph(data, graph:Graph):
             c = data[row][column]
             if c == 'S':
                 startingpoint = {'row':row, 'column':column}
-    locations2[startingpoint['row']][startingpoint['column']] = "X"
+    locations2[startingpoint['row']][startingpoint['column']] = data[startingpoint['row']][startingpoint['column']]
     visited= set()
     row = startingpoint['row']
     column = startingpoint['column']-1
@@ -70,11 +70,11 @@ def readInGraph(data, graph:Graph):
     visited.add(locations[startingpoint['row']][startingpoint['column']])
     nexto = {'row' : row ,'column': column}
     while locations[nexto['row']][nexto['column']] not in visited:
-        locations2[nexto['row']][nexto['column']] = "X"
+        locations2[nexto['row']][nexto['column']] = data[nexto['row']][nexto['column']]
         visited.add(locations[nexto['row']][nexto['column']])
         nexto = CharDef(graph,locations,nexto['row'],nexto['column'], data[nexto['row']][nexto['column']],visited)
     
-    with open('output.txt', 'w') as file:
+    with open('output2.txt', 'w') as file:
         for element in locations2:
             file.write(str(element) + '\n')  
     return start
