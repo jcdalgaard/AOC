@@ -1,0 +1,40 @@
+
+CREATE TABLE CONTENT(
+
+content varchar(1000)
+
+)
+
+
+
+BULK INSERT content
+  FROM 'C:\source\AdventOfCode2022\4.December\t.txt'
+  WITH  
+     (
+        ROWTERMINATOR ='\n'
+     )
+
+
+with firstt as (
+Select Substring(content,0,CharIndex(',',content)) startt, Substring(content,CharIndex(',',content)+1, len(content)) endd
+from dbo.content
+
+)
+
+, secondd as (
+select  Substring(startt,0,CharIndex('-',startt)) startt_st, Substring(startt,CharIndex('-',startt)+1, len(startt)) startt_end, Substring(endd,0,CharIndex('-',endd)) endd_st, Substring(endd,CharIndex('-',endd)+1, len(endd)) endd_end
+from firstt
+
+)
+
+--select count(*)
+--from secondd
+--where (cast(endd_st as int) >= cast(startt_st as int) and cast(endd_end as int) <= cast(startt_end as int)) or (cast(startt_st as int) >= cast(endd_st as int) and cast(startt_end as int) <= cast(endd_end as int))
+
+select count(*)
+from secondd
+where    (cast(endd_st as int) between cast(startt_st as int) and  cast(startt_end as int))  or
+(cast(endd_end as int) between cast(startt_st as int) and  cast(startt_end as int)) or
+(cast(startt_st as int) between cast(endd_st as int) and  cast(endd_end as int)) or
+(cast(startt_end as int) between cast(endd_st as int) and  cast(endd_end as int))
+
