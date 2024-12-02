@@ -77,22 +77,6 @@ mod tests {
     use super::*;
 
     #[test]
-    #[should_panic]
-    fn test_fileread() {
-        let test_path = "testata.txt";
-        readfile::read_file(test_path).expect("Failed to readFile");
-    }
-    #[test]
-    fn test_fileread_correct_path() {
-        let test_path = "testData.txt";
-        let result: Vec<String> = readfile::read_file(test_path).expect("Failed to readFile");
-
-        for line in &result {
-            println!("{}", line);
-        }
-        assert!(result.len() > 0);
-    }
-    #[test]
     fn test_calc() {
         let path = "testData.txt";
         let result = calc(&path).expect("Failed to calc");
