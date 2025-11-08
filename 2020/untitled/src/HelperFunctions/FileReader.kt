@@ -19,6 +19,9 @@ class FileReader {
             throw e;
         }
     }
+    fun returnMap(filePath: String): List<List<String>>{
+        return returnContentAsList((filePath)).map { it.split("").filter { x -> x.isNotBlank() } };
+    }
 
 
 }
