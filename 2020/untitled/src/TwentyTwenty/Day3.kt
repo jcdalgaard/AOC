@@ -15,7 +15,7 @@ class Day3(path: String) {
     }
 
     fun challenge1(slope: Pair<Int, Int>): Int {
-        var counter = 0;    
+        var counter = 0;
         var indexX =  0;
         var indexY = 0;
 

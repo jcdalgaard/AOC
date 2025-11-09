@@ -22,6 +22,22 @@ class FileReader {
     fun returnMap(filePath: String): List<List<String>>{
         return returnContentAsList((filePath)).map { it.split("").filter { x -> x.isNotBlank() } };
     }
+    fun concatStringBasedOnEmptyLines(filePath: String) : List<String>{
+        var list = returnContentAsList(filePath)
+        var newList =  emptyList<String>().toMutableList();
+        var string ="";
+        for(x in list){
+            if (x.isNotBlank()){
+                string += "$x ";
+
+            } else {
+                newList.add(string)
+                string = "";
+            }
+        }
+        if (string.isNotBlank()) newList.add(string)
+        return newList;
+    }
 
 
 }
