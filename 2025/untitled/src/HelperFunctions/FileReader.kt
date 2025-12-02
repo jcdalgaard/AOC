@@ -38,6 +38,9 @@ class FileReader {
         if (string.isNotBlank()) newList.add(string)
         return newList;
     }
+    fun returnLineSplit(filePath: String, delimter: String): List<String>{
+        return returnContentAsList(filePath)[0].split(delimter);
+    }
 
 
 }
