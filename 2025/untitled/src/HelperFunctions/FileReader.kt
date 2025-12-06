@@ -42,6 +42,10 @@ class FileReader {
         return returnContentAsList(filePath)[0].split(delimter);
     }
 
+    fun returnMap(filePath: String,splitBy: String): List<List<String>>{
+        return returnContentAsList((filePath)).map { it.split(splitBy).filter { x -> x.isNotBlank() } };
+    }
+
 
 }
 
