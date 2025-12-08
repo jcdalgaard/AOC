@@ -1,5 +1,6 @@
 package HelperFunctions
 
+import DataClasses.Point
 import java.io.File
 
 class FileReader {
@@ -44,6 +45,9 @@ class FileReader {
 
     fun returnMap(filePath: String,splitBy: String): List<List<String>>{
         return returnContentAsList((filePath)).map { it.split(splitBy).filter { x -> x.isNotBlank() } };
+    }
+    fun returnListOfZPoints(filePath: String,splitBy: String): List<Point>{
+        return returnContentAsList(filePath).map { it -> it.split(splitBy).let { Point(it[0].toDouble(), it[1].toDouble(),it[2].toDouble(), mutableListOf())} }
     }
 
 
